@@ -16,8 +16,8 @@ public class JogoDaVelha extends JFrame implements ActionListener{
 		 setDefaultCloseOperation(EXIT_ON_CLOSE); // adicionando função fechar X
 		 
 		 // criando matriz de botões e adicionando ACTIONLISTENER para receber ação 
-		 for(int n = 0; n < 3; n++){ // linha
-			 for (int m = 0; m < 3; m++){ // coluna
+		 for(int n = 0; n < botao.length; n++){ // linha
+			 for (int m = 0; m < botao[n].length; m++){ // coluna
 				 botao[n][m] = new JButton("");
 				 botao[n][m].addActionListener(this);
 			 }
@@ -27,8 +27,8 @@ public class JogoDaVelha extends JFrame implements ActionListener{
 			 Container janela;
 			 janela = getContentPane();
 			 janela.setLayout (new GridLayout(3,3)); // Layout c/ 3 linhas x 3 colunas
-			 for(int n = 0; n < 4; n++){ // linhas
-				 for (int m = 0; m < 4; m++){ // colunas
+			 for(int n = 0; n < botao.length; n++){ // linha
+				 for (int m = 0; m < botao[n].length; m++){ // colunas
 					 janela.add(botao[n][m]);
 				 }
 			 }
@@ -43,8 +43,8 @@ public class JogoDaVelha extends JFrame implements ActionListener{
 	}
 	public void actionPerformed(ActionEvent e) {
 		int player = 0;
-		for(int n = 0; n < 3; n++){
-			 for (int m = 0; m < 3; m++){
+		for(int n = 0; n < botao.length; n++){ // linha
+			 for (int m = 0; m < botao[n].length; m++){ // colunas
 				 if (e.getSource() == botao[n][m]){
 					 botao[n][m].setEnabled(false);
 				 }
