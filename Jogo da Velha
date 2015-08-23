@@ -36,29 +36,25 @@ public class JogoDaVelha extends JFrame implements ActionListener{
 			 setLocationRelativeTo(null);
 		 
 	}
+	
+	
 	public static void main(String[] args) {
 		JogoDaVelha jogo = new JogoDaVelha();
 		jogo.setResizable(false);
 		jogo.setVisible(true);
 	}
+	
+	
 	public void actionPerformed(ActionEvent e) {
 		int player = 0;
 		for(int n = 0; n < botao.length; n++){ // linha
-			 for (int m = 0; m < botao[n].length; m++){ // colunas
+			for (int m = 0; m < botao[n].length; m++){// colunas
 				 if (e.getSource() == botao[n][m]){
 					 botao[n][m].setEnabled(false);
 				 }
-				 if (player % 2 == 0){
-					simbolo = par;
-					botao[n][m].setText(simbolo);
-					}
-				 if(player % 2 != 0){
-					simbolo = impar;
-					botao[n][m].setText(simbolo);
-					}
-				 }
-			 player++;
 			 }
+			 player++;
+		}
 		
 	}
 }
