@@ -1,0 +1,64 @@
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.*;
+
+public class JogoDaVelha extends JFrame implements ActionListener{
+	private JButton botao[][] = new JButton[3][3]; // criando matriz de botoes
+	private JButton newGame, exitGame; // botoes para novo jogo e sair
+	private JLabel infoGame, player1, player2, totalWinPlayer1, totalWinPlayer2, numDraw;
+	private JPanel painelJogo, painelInfo; // criando paineis para organizar mais facilmente
+	String par = "X", impar = "O", simbolo = "";
+	
+	public JogoDaVelha(){
+		 super("Jogo da Velha"); // nome da janela
+		 setDefaultCloseOperation(EXIT_ON_CLOSE); // adicionando função fechar X
+		 
+		 // criando matriz de botões e adicionando ACTIONLISTENER para receber ação 
+		 for(int n = 0; n < 3; n++){ // linha
+			 for (int m = 0; m < 3; m++){ // coluna
+				 botao[n][m] = new JButton("");
+				 botao[n][m].addActionListener(this);
+			 }
+		 }
+		 
+		 JPanel painelJogo = new JPanel();
+			 Container janela;
+			 janela = getContentPane();
+			 janela.setLayout (new GridLayout(3,3)); // Layout c/ 3 linhas x 3 colunas
+			 for(int n = 0; n < 4; n++){ // linhas
+				 for (int m = 0; m < 4; m++){ // colunas
+					 janela.add(botao[n][m]);
+				 }
+			 }
+			 setSize(200,200);
+			 setLocationRelativeTo(null);
+		 
+	}
+	public static void main(String[] args) {
+		JogoDaVelha jogo = new JogoDaVelha();
+		jogo.setResizable(false);
+		jogo.setVisible(true);
+	}
+	public void actionPerformed(ActionEvent e) {
+		int player = 0;
+		for(int n = 0; n < 3; n++){
+			 for (int m = 0; m < 3; m++){
+				 if (e.getSource() == botao[n][m]){
+					 botao[n][m].setEnabled(false);
+				 }
+				 if (player % 2 == 0){
+					simbolo = par;
+					botao[n][m].setText(simbolo);
+					}
+				 if(player % 2 != 0){
+					simbolo = impar;
+					botao[n][m].setText(simbolo);
+					}
+				 }
+			 player++;
+			 }
+		
+	}
+}
