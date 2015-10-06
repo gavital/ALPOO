@@ -1,4 +1,3 @@
-package JogodaVelha;
 /**************************************************
  * Exercício aula ALPOO
  * Criar um jogo da velha que informe o vencedor.
@@ -8,6 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 public class JogoDaVelha extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L; // nem ideia o pq precisa disso, mas tava no exemplo do professor
@@ -17,13 +17,15 @@ public class JogoDaVelha extends JFrame implements ActionListener {
 	private JLabel player1, simbolo1, player2, simbolo2, totalWinPlayer1,
 			totalWinPlayer2, totalDraw;
 	private int quemJoga = 0; // implementado no método ACAO para alterar o simbolo
+	
 
 	// Método construtor
 	public JogoDaVelha() {
 
 		// Criação de todos os componentes da interface
 		super("Jogo da Velha"); // nome da janela
-		setSize(470, 270); // Tamanho da janela
+		((JComponent)getContentPane()).setBorder(new EmptyBorder(5, 5, 5, 5)); // Determina uma borda ao redor dos componentes
+		setSize(500, 270); // Tamanho da janela
 		setLocationRelativeTo(null); // centralizando a janela
 		setDefaultCloseOperation(EXIT_ON_CLOSE); // adicionando função fechar X
 
@@ -61,10 +63,13 @@ public class JogoDaVelha extends JFrame implements ActionListener {
 		JPanel gamePanel = new JPanel(new GridLayout(3, 3));
 		for (int n = 0; n < botao.length; n++) { // linha
 			for (int m = 0; m < botao[n].length; m++) { // coluna
+				botao[n][m].setFont(new Font("Calibri", Font.BOLD, 60));
+				botao[n][m].setBackground(Color.white);
 				gamePanel.add(botao[n][m]);
+				
 			}
 		}
-		janela.add(gamePanel); // adicionando
+		janela.add(gamePanel); // adicionando painel do jogo
 
 		// Colocando as informações do jogo em um segundo painel
 		JPanel gameInfo = new JPanel(new GridLayout(8, 2));
@@ -96,16 +101,75 @@ public class JogoDaVelha extends JFrame implements ActionListener {
 			quemJoga = 0;
 		}
 		botao[i][j].setText(XO);
+		Verifica(XO);
 	}
 	
-	
-
-	public static void main(String[] args) {
-		JogoDaVelha jogo = new JogoDaVelha();
-		jogo.setResizable(false);
-		jogo.setVisible(true);
+	public void Verifica(String XO){
+		// verificando as horizontais
+		if ((botao[0][0].getText().equals(XO)) && (botao[0][1].getText().equals(XO))&&(botao[0][2].getText().equals(XO))){
+			botao[0][0].setBackground(Color.green);
+			botao[0][1].setBackground(Color.green);
+			botao[0][2].setBackground(Color.green);
+		}
+		
+		if ((botao[1][0].getText().equals(XO)) && (botao[1][1].getText().equals(XO))&&(botao[1][2].getText().equals(XO))){
+			botao[1][0].setBackground(Color.green);
+			botao[1][1].setBackground(Color.green);
+			botao[1][2].setBackground(Color.green);
+		}
+		
+		if ((botao[2][0].getText().equals(XO)) && (botao[2][1].getText().equals(XO))&&(botao[2][2].getText().equals(XO))){
+			botao[2][0].setBackground(Color.green);
+			botao[2][1].setBackground(Color.green);
+			botao[2][2].setBackground(Color.green);
+		}
+		
+		// Verificando as verticais
+		if ((botao[0][0].getText().equals(XO)) && (botao[1][0].getText().equals(XO))&&(botao[2][0].getText().equals(XO))){
+			botao[0][0].setBackground(Color.green);
+			botao[1][0].setBackground(Color.green);
+			botao[2][0].setBackground(Color.green);
+		}
+		
+		if ((botao[0][1].getText().equals(XO)) && (botao[1][1].getText().equals(XO))&&(botao[2][1].getText().equals(XO))){
+			botao[0][1].setBackground(Color.green);
+			botao[1][1].setBackground(Color.green);
+			botao[2][1].setBackground(Color.green);
+		}
+		
+		if ((botao[0][2].getText().equals(XO)) && (botao[1][2].getText().equals(XO))&&(botao[2][2].getText().equals(XO))){
+			botao[0][2].setBackground(Color.green);
+			botao[1][2].setBackground(Color.green);
+			botao[2][2].setBackground(Color.green);
+		}
+		
+		// Verifica diagonais
+		if ((botao[0][0].getText().equals(XO)) && (botao[1][1].getText().equals(XO))&&(botao[2][2].getText().equals(XO))){
+			botao[0][0].setBackground(Color.green);
+			botao[1][1].setBackground(Color.green);
+			botao[2][2].setBackground(Color.green);
+		}
+		
+		if ((botao[2][0].getText().equals(XO)) && (botao[1][1].getText().equals(XO))&&(botao[1][2].getText().equals(XO))){
+			botao[2][0].setBackground(Color.green);
+			botao[1][1].setBackground(Color.green);
+			botao[1][2].setBackground(Color.green);
+		}
+		
+		//Verifica se deu velha
+		/*if ((botao[0][0].getText() != "   ") && (botao[1][0].getText() != "   ")
+				&& (botao[2][0].getText() != "   ") && (botao[0][1].getText() != "   ")
+				&& (botao[1][1].getText() != "   ") && (botao[2][1].getText() != "   ")
+				&& (botao[0][2].getText() != "   ") && (botao[1][2].getText() != "   ")
+				&& (botao[2][2].getText() != "   ")){
+			for (int n = 0; n < botao.length; n++) { // linha
+				for (int m = 0; m < botao[n].length; m++) {// colunas
+					botao[n][m].setBackground(Color.red);
+				}
+			}
+		}*/
 	}
-
+	
 	public void actionPerformed(ActionEvent e) {
 		// Desabilitando os botões depois de clicados
 		for (int n = 0; n < botao.length; n++) { // linha
@@ -116,9 +180,26 @@ public class JogoDaVelha extends JFrame implements ActionListener {
 				}
 			}
 		}
-
+	
+	
+		if (e.getSource() == newGame){
+				for (int n = 0; n < botao.length; n++) { // linha
+					for (int m = 0; m < botao[n].length; m++) {// colunas
+						botao[n][m].setText("");
+						botao[n][m].setBackground(Color.white);
+						botao[n][m].setEnabled(true);
+					}
+				}
+		}
+	
 	}
 
 	
 	
+	public static void main(String[] args) {
+		JogoDaVelha jogo = new JogoDaVelha();
+		jogo.setResizable(false);
+		jogo.setVisible(true);
+	}
 }
+
